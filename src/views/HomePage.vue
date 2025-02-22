@@ -16,12 +16,6 @@
       </div>
 
       <div class="controls">
-        <ion-button @click="moveUp">⬆️</ion-button>
-        <div>
-          <ion-button @click="moveLeft">⬅️</ion-button>
-          <ion-button @click="moveDown">⬇️</ion-button>
-          <ion-button @click="moveRight">➡️</ion-button>
-        </div>
         <ion-button @click="restartGame" color="danger">Restart</ion-button>
       </div>
     </ion-content>
@@ -29,33 +23,35 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, onUnmounted } from 'vue';
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonButton } from '@ionic/vue';
 import { Game2048 } from '../game2048';
 
 const game = ref(new Game2048(4, 4));
 
-const moveUp = () => {
-  game.value.moveUp();
-};
-
-const moveDown = () => {
-  game.value.moveDown();
-};
-
-const moveLeft = () => {
-  game.value.moveLeft();
-};
-
-const moveRight = () => {
-  game.value.moveRight();
+const handleKeydown = (event: KeyboardEvent) => {
+  if(event.key === 'w' || event.key === 'ArrowUp') {
+    game.value.moveUp()
+  } else if (event.key === 'd' || event.key === 'ArrowRight') {
+    game.value.moveRight()
+  } else if (event.key === 's' || event.key === 'ArrowDown') {
+    game.value.moveDown()
+  } else if (event.key === 'a' || event.key === 'MoveLeft') {
+    game.value.moveLeft()
+  }
 };
 
 const restartGame = () => {
   game.value.restart();
 };
 
-onMounted(() => {});
+onMounted(() => {
+  window.addEventListener('keydown', handleKeydown);
+});
+
+onUnmounted(() => {
+  window.removeEventListener('keydown', handleKeydown);
+});
 </script>
 
 <style scoped>
