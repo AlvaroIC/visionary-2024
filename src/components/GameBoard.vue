@@ -26,6 +26,7 @@ import { Game2048 } from '../game2048';
 
 const game = ref(new Game2048(4, 4));
 
+// Handles the key press events
 const handleKeydown = (event: KeyboardEvent) => {
   if (event.key === 'w' || event.key === 'ArrowUp') {
       game.value.moveUp();
@@ -40,11 +41,13 @@ const handleKeydown = (event: KeyboardEvent) => {
 
 let touchStartX = 0, touchStartY = 0, touchEndX = 0, touchEndY = 0;
 
+// Checks when the touch event starts
 const handleTouchStart = (event: TouchEvent) => {
   touchStartX = event.touches[0].clientX;
   touchStartY = event.touches[0].clientY;
 };
 
+// Checks when the touch event ends and updates the tiles accordingly
 const handleTouchEnd = (event: TouchEvent) => {
   touchEndX = event.changedTouches[0].clientX;
   touchEndY = event.changedTouches[0].clientY;
