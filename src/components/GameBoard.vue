@@ -2,7 +2,7 @@
   <div>
       <div class="scores">
           <div class="score">Score: {{ game.getCurrentScore() }}</div>
-          <div class="best-score">Best: {{ game.getBestScore() }}</div>
+          <div class="score">Best: {{ game.getBestScore() }}</div>
       </div>
 
       <div class="board">
@@ -82,15 +82,23 @@ onUnmounted(() => {
 <style scoped>
 .scores {
   display: flex;
-  justify-content: space-between;
   width: 250px;
-  margin: 10px auto;
+  gap: 5px;
+}
+
+.score {
+  display: flex;
+  justify-content: space-between;
+  width: auto;
+  min-width: 100px;
+  padding: 10px;
+  margin: 0 10px 15px 0;
   font-size: 20px;
   font-weight: bold;
   background: #bbada0;
-  padding: 10px;
   border-radius: 10px;
   color: white;
+  white-space: nowrap;
 }
 
 .board {
