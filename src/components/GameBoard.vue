@@ -7,7 +7,11 @@
 
       <div class="board">
           <div v-for="(row, rowIndex) in game.paint()" :key="rowIndex" class="row">
-              <div v-for="(cell, cellIndex) in row" :key="cellIndex" class="cell">
+              <div v-for="(cell, cellIndex) in row" 
+                :key="cellIndex" 
+                class="cell"
+                :style="{ backgroundColor: getTileColor(cell) }"
+                >
                   {{ cell || '' }}
               </div>
           </div>
@@ -25,6 +29,22 @@ import { IonButton } from '@ionic/vue';
 import { Game2048 } from '../game2048';
 
 const game = ref(new Game2048(4, 4));
+
+const colorMap = new Map<number, string>();
+
+const getTileColor = (value: number) => {
+  if (value === 0) return "#cdc1b4"; // Background color for empty tiles
+
+  // Check if color already exists for this value
+  if (!colorMap.has(value)) {
+    // Generate a random color and store it
+    const randomColor = `hsl(${Math.random() * 360}, 70%, 75%)`;
+    colorMap.set(value, randomColor);
+  }
+
+  // Return the color for this value
+  return colorMap.get(value) || "#cdc1b4"; // Default to empty tile color if somehow not found
+};
 
 // Handles the key press events
 const handleKeydown = (event: KeyboardEvent) => {
