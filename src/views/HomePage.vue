@@ -7,7 +7,9 @@
     </ion-header>
 
     <ion-content :fullscreen="true" class="ion-padding">
-      <GameBoard />
+      <div class="game-container">
+        <GameBoard />
+      </div>
     </ion-content>
   </ion-page>
 </template>
@@ -16,3 +18,14 @@
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/vue';
 import GameBoard from '@/components/GameBoard.vue';
 </script>
+
+<style scoped>
+.game-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 80vh; /* Ensure it takes full height */
+  width: 100%;
+}
+</style>

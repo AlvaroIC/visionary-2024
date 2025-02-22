@@ -1,14 +1,16 @@
 <template>
-    <div class="board">
-      <div v-for="(row, rowIndex) in game.paint()" :key="rowIndex" class="row">
-        <div v-for="(cell, cellIndex) in row" :key="cellIndex" class="cell">
-          {{ cell || '' }}
+    <div>
+        <div class="board">
+          <div v-for="(row, rowIndex) in game.paint()" :key="rowIndex" class="row">
+            <div v-for="(cell, cellIndex) in row" :key="cellIndex" class="cell">
+              {{ cell || '' }}
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-  
-    <div class="controls">
-      <ion-button @click="restartGame" color="danger">Restart</ion-button>
+      
+        <div class="controls">
+          <ion-button @click="restartGame" color="danger">Restart</ion-button>
+        </div>
     </div>
   </template>
   
