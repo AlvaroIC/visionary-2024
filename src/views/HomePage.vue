@@ -29,6 +29,7 @@ import { Game2048 } from '../game2048';
 
 const game = ref(new Game2048(4, 4));
 
+// Handles key presses by the user and moves the tiles accordingly
 const handleKeydown = (event: KeyboardEvent) => {
   if(event.key === 'w' || event.key === 'ArrowUp') {
     game.value.moveUp()
@@ -41,16 +42,57 @@ const handleKeydown = (event: KeyboardEvent) => {
   }
 };
 
+let touchStartX = 0;
+let touchStartY = 0;
+let touchEndX = 0;
+let touchEndY = 0;
+
+// Captures the position of a touch when it starts
+const handleTouchStart = (event: TouchEvent) => {
+  touchStartX = event.touches[0].clientX;
+  touchStartY = event.touches[0].clientY;
+};
+
+// Captures the position of a touch when it ends, and moves the tiles accordingly
+const handleTouchEnd = (event: TouchEvent) => {
+  touchEndX = event.changedTouches[0].clientX;
+  touchEndY = event.changedTouches[0].clientY;
+
+  const deltaX = touchEndX - touchStartX;
+  const deltaY = touchEndY - touchStartY;
+
+  // Determinea if horizontal or vertical movement is larger
+  if (Math.abs(deltaX) > Math.abs(deltaY)) {
+    // Horizontal swipe
+    if (deltaX > 30) {
+      game.value.moveRight(); // Swipe Right
+    } else if (deltaX < -30) {
+      game.value.moveLeft(); // Swipe Left
+    }
+  } else {
+    // Vertical swipe
+    if (deltaY > 30) {
+      game.value.moveDown(); // Swipe Down
+    } else if (deltaY < -30) {
+      game.value.moveUp(); // Swipe Up
+    }
+  }
+};
+
 const restartGame = () => {
   game.value.restart();
 };
 
 onMounted(() => {
   window.addEventListener('keydown', handleKeydown);
+  window.addEventListener('touchstart', handleTouchStart);
+  window.addEventListener('touchend', handleTouchEnd);
 });
 
 onUnmounted(() => {
   window.removeEventListener('keydown', handleKeydown);
+  window.removeEventListener('touchstart', handleTouchStart);
+  window.removeEventListener('touchend', handleTouchEnd);
 });
 </script>
 
