@@ -1,9 +1,6 @@
 <template>
   <div>
-      <div class="scores">
-          <div class="score">Score: {{ game.getCurrentScore() }}</div>
-          <div class="score">Best: {{ game.getBestScore() }}</div>
-      </div>
+      <ScoreBoard :currentScore="game.getCurrentScore()" :bestScore="game.getBestScore()" />
 
       <div class="board">
           <div v-for="(row, rowIndex) in game.paint()" :key="rowIndex" class="row">
@@ -27,6 +24,7 @@
 import { ref, onMounted, onUnmounted } from 'vue';
 import { IonButton } from '@ionic/vue';
 import { Game2048 } from '../game2048';
+import  ScoreBoard from './ScoreBoard.vue';
 
 const game = ref(new Game2048(4, 4));
 
@@ -100,27 +98,6 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
-.scores {
-  display: flex;
-  width: 250px;
-  gap: 5px;
-}
-
-.score {
-  display: flex;
-  justify-content: space-between;
-  width: auto;
-  min-width: 100px;
-  padding: 10px;
-  margin: 0 10px 15px 0;
-  font-size: 20px;
-  font-weight: bold;
-  background: #bbada0;
-  border-radius: 10px;
-  color: white;
-  white-space: nowrap;
-}
-
 .board {
   display: grid;
   gap: 5px;
