@@ -38,11 +38,9 @@ export class Game2048 {
         }
     }
   
-    private paint(): void {
-        console.clear();
-        for (const row of this.board) {
-            console.log(row.join(' | '));
-        }
+    // Returns the board in its current state
+    public paint(): number[][] {
+        return this.board
     }
   
     // Sets a  new 2 in a random empty position of the board and updates its state
@@ -89,7 +87,6 @@ export class Game2048 {
         this.moveRight();
         this.rotateBoard();
         this.rotateBoard();
-        this.next();
     }
   
     private rotateBoard(): void {
@@ -114,7 +111,6 @@ export class Game2048 {
         this.rotateBoard();
         this.rotateBoard();
         this.rotateBoard();
-        this.next();
     }
     
     // Moves the numbers down and places the next 2
@@ -124,6 +120,5 @@ export class Game2048 {
         this.rotateBoard();
         this.moveRight();
         this.rotateBoard();
-        this.next();
     }
 }  

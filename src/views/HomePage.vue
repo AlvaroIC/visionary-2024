@@ -6,51 +6,91 @@
       </ion-toolbar>
     </ion-header>
 
-    <ion-content :fullscreen="true">
-      <ion-header collapse="condense">
-        <ion-toolbar>
-          <ion-title size="large">Visionary 2048</ion-title>
-        </ion-toolbar>
-      </ion-header>
+    <ion-content :fullscreen="true" class="ion-padding">
+      <div class="board">
+        <div v-for="(row, rowIndex) in game.paint()" :key="rowIndex" class="row">
+          <div v-for="(cell, cellIndex) in row" :key="cellIndex" class="cell">
+            {{ cell || '' }}
+          </div>
+        </div>
+      </div>
 
-      <div id="container">
-        <strong>Ready to create an app?</strong>
-        <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+      <div class="controls">
+        <ion-button @click="moveUp">⬆️</ion-button>
+        <div>
+          <ion-button @click="moveLeft">⬅️</ion-button>
+          <ion-button @click="moveDown">⬇️</ion-button>
+          <ion-button @click="moveRight">➡️</ion-button>
+        </div>
+        <ion-button @click="restartGame" color="danger">Restart</ion-button>
       </div>
     </ion-content>
   </ion-page>
 </template>
 
 <script setup lang="ts">
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/vue';
+import { ref, onMounted } from 'vue';
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonButton } from '@ionic/vue';
+import { Game2048 } from '../game2048';
+
+const game = ref(new Game2048(4, 4));
+
+const moveUp = () => {
+  game.value.moveUp();
+};
+
+const moveDown = () => {
+  game.value.moveDown();
+};
+
+const moveLeft = () => {
+  game.value.moveLeft();
+};
+
+const moveRight = () => {
+  game.value.moveRight();
+};
+
+const restartGame = () => {
+  game.value.restart();
+};
+
+onMounted(() => {});
 </script>
 
 <style scoped>
-#container {
-  text-align: center;
-  
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
+.board {
+  display: grid;
+  gap: 5px;
+  background: #bbada0;
+  padding: 10px;
+  border-radius: 10px;
+  width: fit-content;
+  margin: auto;
 }
 
-#container strong {
+.row {
+  display: flex;
+}
+
+.cell {
+  width: 60px;
+  height: 60px;
+  background: #eee4da;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-size: 20px;
-  line-height: 26px;
+  font-weight: bold;
+  border-radius: 5px;
+  margin: 3px;
 }
 
-#container p {
-  font-size: 16px;
-  line-height: 22px;
-  
-  color: #8c8c8c;
-  
-  margin: 0;
-}
-
-#container a {
-  text-decoration: none;
+.controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-top: 20px;
 }
 </style>
