@@ -25,7 +25,7 @@ import GameBoard from '@/components/GameBoard.vue';
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 80vh; /* Ensure it takes full height */
+  height: 80vh;
   width: 100%;
 }
 </style>

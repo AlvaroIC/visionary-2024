@@ -2,19 +2,25 @@ export class Game2048 {
     board: number[][];
     height: number;
     width: number;
+    currentScore: number;
+    bestScore: number;
   
     // By default, the dimensions of the board are 3x3
     constructor(height: number = 3, width: number = 3) {
         this.height = height;
         this.width = width;
+        this.currentScore = 0;
+        // Gets the current best score
+        this.bestScore = this.loadBestScore();
         this.board = Array.from({ length: height }, () => Array(width).fill(0));
         // The game starts after the first 2 is placed on the board
         this.next();
     }
   
-    // Restarts the board and sets the first 2
+    // Restarts the board, sets the current score to 0 and places the first 2
     public restart(): void {
         this.board = Array.from({ length: this.height }, () => Array(this.width).fill(0));
+        this.currentScore = 0;
         this.next();
     }
   
@@ -63,6 +69,8 @@ export class Game2048 {
             // Merge tiles if two consecutive tiles have the same number
             for (let i = row.length - 1; i > 0; i--) {
                 if (row[i] === row[i - 1]) {
+                    // Updates the current score
+                    this.currentScore += row[i] * 2;
                     row[i] *= 2;
                     row.splice(i - 1, 1); // Remove the merged tile
                 }
@@ -76,7 +84,14 @@ export class Game2048 {
             // Update the row in the board
             this.board[y] = row;
         }
+
+        // Check if currentScore exceeds bestScore
+        if (this.currentScore > this.bestScore) {
+            this.bestScore = this.currentScore;
+            this.saveBestScore(); // Save new best score
+        }
         
+        //
         this.next();
     }
   
@@ -121,4 +136,21 @@ export class Game2048 {
         this.moveRight();
         this.rotateBoard();
     }
+
+    public getCurrentScore(): number {
+        return this.currentScore;
+    }
+
+    private saveBestScore(): void {
+        localStorage.setItem("bestScore", this.bestScore.toString());
+    }
+
+    private loadBestScore(): number {
+        return parseInt(localStorage.getItem("bestScore") || "0", 10);
+    }
+
+    public getBestScore(): number {
+        return this.bestScore;
+    }
+    
 }  
