@@ -1,13 +1,14 @@
 <template>
     <div>
-      <div class="custom-button" @click="showAlert">
-        {{ $t('restart') }}
+      <div class="custom-button" @click="showPrompt">
+        {{ $t('resize') }}
       </div>
   
       <ion-alert
         :isOpen="alertVisible"
-        :header="$t('restart-question')"
-        :message="$t('restart-question-explanation')"
+        :header="$t('resize-question')"
+        :message="$t('resize-question-explanation')"
+        :inputs="alertInputs"
         :buttons="alertButtons"
         @didDismiss="handleAlertDismiss"
       ></ion-alert>
@@ -20,31 +21,45 @@
   import { defineEmits } from 'vue';
   import { useI18n } from 'vue-i18n';
   
-  // Get the translation function
   const { t } = useI18n();
-  // Emits the order to restart
-  const emit = defineEmits(['restart']);
+  const emit = defineEmits(['resize']);
   const alertVisible = ref(false);
+  const gridSize = ref(3); // Default grid size
+  
+  const alertInputs = [
+    {
+      name: 'size',
+      type: 'number',
+      placeholder: t('resize-placeholder'),
+      min: 3,
+      max: 6,
+      value: gridSize.value,
+    },
+  ];
   
   const alertButtons = [
     {
-      text: t('restart-question-cancel'),
+      text: t('resize-question-cancel'),
       role: 'cancel',
       handler: () => {
         alertVisible.value = false;
       },
     },
     {
-      text: t('restart-question-restart'),
+      text: t('resize-question-resize'),
       role: 'confirm',
-      handler: () => {
-        emit('restart');
+      handler: (data: { size: string; }) => {
+        const newSize = parseInt(data.size);
+        if (newSize >= 3 && newSize <= 6) {
+          gridSize.value = newSize;
+          emit('resize', newSize);
+        }
         alertVisible.value = false;
       },
     },
   ];
   
-  const showAlert = () => {
+  const showPrompt = () => {
     alertVisible.value = true;
   };
   
@@ -63,7 +78,7 @@
     padding: 0.5em;
     font-size: 20px;
     font-weight: bold;
-    background: #d34a4a;
+    background: #4a80d3;
     border-radius: 10px;
     color: white;
     cursor: pointer;
@@ -72,10 +87,10 @@
   }
   
   .custom-button:hover {
-    background: #b33b3b;
+    background: #3b6bb3;
   }
   
   .custom-button:active {
-    background: #9e2a2a;
+    background: #2a559e;
   }
-  </style>  
+  </style>

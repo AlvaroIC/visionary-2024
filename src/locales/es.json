@@ -5,5 +5,10 @@
     "restart-question": "¿Reiniciar la Partida?",
     "restart-question-explanation": "¿Estás seguro de que quieres reiniciarla? Se perderá tu progreso.",
     "restart-question-cancel": "Cancelar",
-    "restart-question-restart": "Reiniciar"
+    "restart-question-restart": "Reiniciar",
+    "resize": "Reescalar",
+    "resize-question": "¿Reescalar el Tablero?",
+    "resize-question-explanation": "¿Estás seguro de que deseas cambiar el tamaño del tablero? Tu progreso se perderá. Si es así, elige un nuevo tamaño.",
+    "resize-question-cancel": "Cancelar",
+    "resize-question-resize": "Reescalar"
 }

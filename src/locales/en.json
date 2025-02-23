@@ -5,5 +5,10 @@
     "restart-question": "Restart Game?",
     "restart-question-explanation": "Are you sure you want to restart? Your progress will be lost.",
     "restart-question-cancel": "Cancel",
-    "restart-question-restart": "Restart"
+    "restart-question-restart": "Restart",
+    "resize": "Resize",
+    "resize-question": "Resize the Board?",
+    "resize-question-explanation": "Are you sure you want to resize the board? Your progress will be lost. If so, choose a new size.",
+    "resize-question-cancel": "Cancel",
+    "resize-question-resize": "Resize"
 }

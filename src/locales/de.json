@@ -5,5 +5,10 @@
     "restart-question": "Spiel neu Starten?",
     "restart-question-explanation": "Sind Sie sicher, dass Sie neu starten möchten? Ihr Fortschritt geht verloren.",
     "restart-question-cancel": "Abbrechen",
-    "restart-question-restart": "Neustart"
+    "restart-question-restart": "Neustart",
+    "resize": "Größe ändern",
+    "resize-question": "Das Board neu skalieren?",
+    "resize-question-explanation": "Sind Sie sicher, dass Sie die Größe des Boards ändern möchten? Ihr Fortschritt geht verloren. Wenn ja, wählen Sie eine neue Größe.",
+    "resize-question-cancel": "Abbrechen",
+    "resize-question-resize": "Größe ändern"
 }

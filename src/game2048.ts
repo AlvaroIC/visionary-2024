@@ -78,7 +78,6 @@ export class Game2048 {
                     row[i] *= 2;
                     row.splice(i - 1, 1); // Remove the merged tile
                     this.mergedTiles.push({ y: y, x: i + (this.width - row.length -1) }); // Adds the merged tile to the merged tiles array
-                    console.log(this.mergedTiles);
                 }
             }
         

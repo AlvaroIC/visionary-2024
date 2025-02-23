@@ -5,5 +5,10 @@
     "restart-question": "Redémarrer le Jeu?",
     "restart-question-explanation": "Etes-vous sûr de vouloir redémarrer? Votre progression sera perdue.",
     "restart-question-cancel": "Abbrechen",
-    "restart-question-restart": "Annuler"
+    "restart-question-restart": "Annuler",
+    "resize": "Redimensionner",
+    "resize-question": "Redimensionner le Tableau?",
+    "resize-question-explanation": "Êtes-vous sûr de vouloir redimensionner le tableau ? Votre progression sera perdue. Si c'est le cas, choisissez une nouvelle taille.",
+    "resize-question-cancel": "Annuler",
+    "resize-question-resize": "Redimensionner"
 }

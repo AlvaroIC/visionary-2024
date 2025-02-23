@@ -16,6 +16,7 @@
 
     <div class="controls">
       <RestartButton @restart="restartGame" />
+      <ResizeButton @resize="resizeGame" />
     </div>
   </div>
 </template>
@@ -25,6 +26,7 @@ import { ref, onMounted, onUnmounted } from 'vue';
 import { Game2048 } from '../game2048';
 import  ScoreBoard from './ScoreBoard.vue';
 import RestartButton from './RestartButton.vue';
+import ResizeButton from './ResizeButton.vue';
 
 const game = ref(new Game2048(3, 3));
 const mergedTiles = ref<{ y: number, x: number }[]>([]);
@@ -112,6 +114,15 @@ const restartGame = () => {
     mergedTiles.value = []; // Reset merged tiles on restart
 };
 
+const initializeGame = (size: number) => {
+  game.value = new Game2048(size, size);
+  colorMap.clear(); // Clear the color map
+};
+
+const resizeGame = (newSize: number) => {
+  initializeGame(newSize); // Starts a new game with the new size
+};
+
 // Computed property to check if a cell is merged
 const isMerged = (rowIndex: number, cellIndex: number): boolean => {
   return mergedTiles.value.some(tile => tile.y === rowIndex && tile.x === cellIndex);
@@ -167,6 +178,7 @@ onUnmounted(() => {
 .controls {
   display: flex;
   flex-direction: column;
+  gap: 0.5em;
   align-items: center;
   margin-top: 1em;
 }
