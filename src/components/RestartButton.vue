@@ -59,7 +59,7 @@
     justify-content: center;
     align-items: center;
     width: auto;
-    min-width: 8em;
+    min-width: 9em;
     padding: 0.5em;
     font-size: 20px;
     font-weight: bold;
