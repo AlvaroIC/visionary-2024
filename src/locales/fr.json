@@ -10,5 +10,7 @@
     "resize-question": "Redimensionner le Tableau?",
     "resize-question-explanation": "Êtes-vous sûr de vouloir redimensionner le tableau ? Votre progression sera perdue. Si c'est le cas, choisissez une nouvelle taille.",
     "resize-question-cancel": "Annuler",
-    "resize-question-resize": "Redimensionner"
+    "resize-question-resize": "Redimensionner",
+    "game-over": "Vous avez perdu!",
+    "game-over-explanation": "Vous avez perdu! Il n'y a plus de mouvements possibles."
 }

@@ -10,5 +10,7 @@
     "resize-question": "Resize the Board?",
     "resize-question-explanation": "Are you sure you want to resize the board? Your progress will be lost. If so, choose a new size.",
     "resize-question-cancel": "Cancel",
-    "resize-question-resize": "Resize"
+    "resize-question-resize": "Resize",
+    "game-over": "Game Over!",
+    "game-over-explanation": "Game Over! No further moves are possible."
 }

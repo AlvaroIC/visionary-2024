@@ -28,10 +28,12 @@ import  ScoreBoard from './ScoreBoard.vue';
 import RestartButton from './RestartButton.vue';
 import ResizeButton from './ResizeButton.vue';
 import { alertController } from '@ionic/vue';
-
+import { useI18n } from 'vue-i18n';
+  
 const game = ref(new Game2048(3, 3));
 const mergedTiles = ref<{ y: number, x: number }[]>([]);
 const alertOpen = ref(false);
+const { t } = useI18n();
 
 const colorMap = new Map<number, string>();
 
@@ -137,8 +139,8 @@ const isMerged = (rowIndex: number, cellIndex: number): boolean => {
 const presentGameOverAlert = async () => {
   alertOpen.value = true;
   const alert = await alertController.create({
-    header: 'Game Over',
-    message: 'No more moves left!',
+    header: t('game-over'),
+    message: t('game-over-explanation'),
     buttons: [
     {
       text: 'OK',

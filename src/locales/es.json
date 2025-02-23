@@ -10,5 +10,7 @@
     "resize-question": "¿Reescalar el Tablero?",
     "resize-question-explanation": "¿Estás seguro de que deseas cambiar el tamaño del tablero? Tu progreso se perderá. Si es así, elige un nuevo tamaño.",
     "resize-question-cancel": "Cancelar",
-    "resize-question-resize": "Reescalar"
+    "resize-question-resize": "Reescalar",
+    "game-over": "¡Has Perdido!",
+    "game-over-explanation": "¡Has perdido! Ya no hay más movimientos posibles."
 }
