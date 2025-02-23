@@ -51,8 +51,8 @@ export class Game2048 {
         return this.board
     }
   
-    // Sets a  new 2 in a random empty position of the board and updates its state
-    public next(): void {
+    // Sets a new 2 in a random empty position of the board and updates its state
+    private next(): void {
         this.newNumber();
         this.paint();
     }
@@ -62,7 +62,6 @@ export class Game2048 {
         return this.board.every(row => row.every(cell => cell !== 0));
     }
   
-    // Moves the numbers to the right and places the next 2
     public moveRight(): void {
         // Resets the merged tiles array
         this.mergedTiles = [];
@@ -78,7 +77,7 @@ export class Game2048 {
                     this.currentScore += row[i] * 2;
                     row[i] *= 2;
                     row.splice(i - 1, 1); // Remove the merged tile
-                    this.mergedTiles.push({ y: y, x: i + (this.width - row.length -1) });
+                    this.mergedTiles.push({ y: y, x: i + (this.width - row.length -1) }); // Adds the merged tile to the merged tiles array
                     console.log(this.mergedTiles);
                 }
             }
@@ -92,16 +91,15 @@ export class Game2048 {
             this.board[y] = row;
         }
 
-        // Check if currentScore exceeds bestScore
+        // Check if the current score exceeds the best score
         if (this.currentScore > this.bestScore) {
             this.bestScore = this.currentScore;
-            this.saveBestScore(); // Save new best score
+            this.saveBestScore(); // Save the new best score
         }
         
         this.next();
     }
   
-    // Moves the numbers to the left and places the next 2
     public moveLeft(): void {
         this.rotateBoard();
         this.rotateBoard();
@@ -122,7 +120,7 @@ export class Game2048 {
             newBoard.push(newRow);
         }
         
-        // Rotate merged tiles
+        // Rotate merged tiles as well
         for (const tile of this.mergedTiles) {
             newMergedTiles.push({y: tile.x, x: this.height - 1 - tile.y});
         }
@@ -132,7 +130,6 @@ export class Game2048 {
         [this.height, this.width] = [this.width, this.height];
     }
   
-    // Moves the numbers up and places the next 2
     public moveUp(): void {
         this.rotateBoard();
         this.moveRight();
@@ -141,7 +138,6 @@ export class Game2048 {
         this.rotateBoard();
     }
     
-    // Moves the numbers down and places the next 2
     public moveDown(): void {
         this.rotateBoard();
         this.rotateBoard();

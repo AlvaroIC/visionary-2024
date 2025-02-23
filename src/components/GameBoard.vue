@@ -26,23 +26,24 @@ import { Game2048 } from '../game2048';
 import  ScoreBoard from './ScoreBoard.vue';
 import RestartButton from './RestartButton.vue';
 
-const game = ref(new Game2048(4, 4));
+const game = ref(new Game2048(3, 3));
 const mergedTiles = ref<{ y: number, x: number }[]>([]);
 
 const colorMap = new Map<number, string>();
 
+// Returns a new color for tiles with a certain multiple of 2
 const getTileColor = (value: number) => {
   if (value === 0) return "#cdc1b4"; // Background color for empty tiles
 
-  // Check if color already exists for this value
+  // Check if a color already exists for this value
   if (!colorMap.has(value)) {
     // Generate a random color and store it
     const randomColor = `hsl(${Math.random() * 360}, 70%, 75%)`;
     colorMap.set(value, randomColor);
   }
 
-  // Return the color for this value
-  return colorMap.get(value) || "#cdc1b4"; // Default to empty tile color if somehow not found
+  // Returns the color for this value
+  return colorMap.get(value) || "#cdc1b4"; // Default to empty tile color if it was not found
 };
 
 // Handles the key press events
@@ -132,9 +133,9 @@ onUnmounted(() => {
 <style scoped>
 .board {
   display: grid;
-  gap: 5px;
+  gap: 0.5em;
   background: #bbada0;
-  padding: 10px;
+  padding: 0.5em;
   border-radius: 10px;
   width: fit-content;
   margin: auto;
@@ -145,28 +146,28 @@ onUnmounted(() => {
 }
 
 .cell {
-  width: 60px;
-  height: 60px;
+  width: 3em;
+  height: 3em;
   background: #eee4da;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 20px;
+  font-size: 2em;
   font-weight: bold;
   border-radius: 5px;
-  margin: 3px;
-  transition: transform 0.2s ease; /* Add transition for smooth animation */
+  margin: 0.25em;
+  transition: transform 0.2s ease;
 }
+
 .cell.merged {
-    transform: scale(1.2); /* Make merged cells 20% larger */
-    z-index: 1; /* Ensure merged tiles appear on top */
+    transform: scale(1.2);
+    z-index: 1;
 }
 
 .controls {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
-  margin-top: 20px;
+  margin-top: 1em;
 }
 </style>

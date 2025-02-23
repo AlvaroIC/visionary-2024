@@ -60,9 +60,8 @@
     justify-content: center;
     align-items: center;
     width: auto;
-    min-width: 100px;
-    padding: 10px;
-    margin: 0 10px 15px 0;
+    min-width: 1em;
+    padding: 0.5em;
     font-size: 20px;
     font-weight: bold;
     background: #d34a4a;

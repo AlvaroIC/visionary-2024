@@ -19,17 +19,17 @@
   .scores {
     display: flex;
     width: 100%;
-    gap: 5px;
+    gap: 1em;
   }
   
   .score {
     display: flex;
     justify-content: space-between;
     width: auto;
-    min-width: 100px;
-    padding: 10px;
-    margin: 0 10px 15px 0;
-    font-size: 20px;
+    min-width: 1em;
+    padding: 0.5em;
+    margin: 0 0 1em 0;
+    font-size: 1.25em;
     font-weight: bold;
     background: #bbada0;
     border-radius: 10px;
