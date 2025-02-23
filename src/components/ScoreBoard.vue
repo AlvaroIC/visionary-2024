@@ -1,7 +1,7 @@
 <template>
     <div class="scores">
-        <div class="score">Score: {{ props.currentScore }}</div>
-        <div class="score">Best: {{ props.bestScore }}</div>
+        <div class="score">{{ $t('score') }} {{ props.currentScore }}</div>
+        <div class="score">{{ $t('best') }} {{ props.bestScore }}</div>
     </div>
   </template>
   

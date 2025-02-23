@@ -1,14 +1,13 @@
 <template>
     <div>
       <div class="custom-button" @click="showAlert">
-        Restart
+        {{ $t('restart') }}
       </div>
   
-      <!-- Conditional rendering of IonAlert -->
       <ion-alert
         :isOpen="alertVisible"
-        header="Restart Game?"
-        message="Are you sure you want to restart? Your progress will be lost."
+        :header="$t('restart-question')"
+        :message="$t('restart-question-explanation')"
         :buttons="alertButtons"
         @didDismiss="handleAlertDismiss"
       ></ion-alert>
@@ -19,38 +18,36 @@
   import { ref } from 'vue';
   import { IonAlert } from '@ionic/vue';
   import { defineEmits } from 'vue';
+  import { useI18n } from 'vue-i18n';
   
+  // Get the translation function
+  const { t } = useI18n();
+  // Emits the order to restart
   const emit = defineEmits(['restart']);
-  
-  // Local state to manage the alert's visibility
   const alertVisible = ref(false);
   
-  // Alert buttons with actions
   const alertButtons = [
     {
-      text: 'Cancel',
+      text: t('restart-question-cancel'),
       role: 'cancel',
       handler: () => {
-        console.log('Alert canceled');
-        alertVisible.value = false;  // Hide the alert if canceled
+        alertVisible.value = false;
       },
     },
     {
-      text: 'Restart',
+      text: t('restart-question-restart'),
       role: 'confirm',
       handler: () => {
         emit('restart');
-        alertVisible.value = false;  // Hide the alert after confirming restart
+        alertVisible.value = false;
       },
     },
   ];
   
-  // Show the alert by setting alertVisible to true
   const showAlert = () => {
     alertVisible.value = true;
   };
   
-  // Handle the alert's dismissal
   const handleAlertDismiss = () => {
     console.log('Alert dismissed');
     alertVisible.value = false;
