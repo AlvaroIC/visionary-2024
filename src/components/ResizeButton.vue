@@ -30,7 +30,6 @@
     {
       name: 'size',
       type: 'number',
-      placeholder: t('resize-placeholder'),
       min: 3,
       max: 6,
       value: gridSize.value,

@@ -61,6 +61,32 @@ export class Game2048 {
     public isBoardFull(): boolean {
         return this.board.every(row => row.every(cell => cell !== 0));
     }
+
+    // Checks if a new move is possible
+    public canMove(): boolean {
+        if (!this.isBoardFull()) {
+            return true; // If the board isn't full, a move is always possible
+        }
+
+        // Check for adjacent equal tiles (only if the board is full)
+        for (let y = 0; y < this.height; y++) {
+            for (let x = 0; x < this.width; x++) {
+                const currentValue = this.board[y][x];
+
+                // Check right
+                if (x < this.width - 1 && this.board[y][x + 1] === currentValue) {
+                    return true;
+                }
+
+                // Check down
+                if (y < this.height - 1 && this.board[y + 1][x] === currentValue) {
+                    return true;
+                }
+            }
+        }
+
+        return false; // Board is full and no adjacent equal tiles, so no move possible
+    }
   
     public moveRight(): void {
         // Resets the merged tiles array

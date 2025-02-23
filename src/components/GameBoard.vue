@@ -27,9 +27,11 @@ import { Game2048 } from '../game2048';
 import  ScoreBoard from './ScoreBoard.vue';
 import RestartButton from './RestartButton.vue';
 import ResizeButton from './ResizeButton.vue';
+import { alertController } from '@ionic/vue';
 
 const game = ref(new Game2048(3, 3));
 const mergedTiles = ref<{ y: number, x: number }[]>([]);
+const alertOpen = ref(false);
 
 const colorMap = new Map<number, string>();
 
@@ -49,7 +51,7 @@ const getTileColor = (value: number) => {
 };
 
 // Handles the key press events
-const handleKeydown = (event: KeyboardEvent) => {
+const handleKeydown = async (event: KeyboardEvent) => {
     let moved = false;
   if (event.key === 'w' || event.key === 'ArrowUp') {
     game.value.moveUp();
@@ -70,6 +72,10 @@ const handleKeydown = (event: KeyboardEvent) => {
         setTimeout(() => {
             mergedTiles.value = [];
         }, 200); // Clear merged tiles after animation
+    }
+
+    if (!game.value.canMove() && alertOpen.value === false) {
+      await presentGameOverAlert(); // Show alert if no further move is possible
     }
 };
 
@@ -126,6 +132,25 @@ const resizeGame = (newSize: number) => {
 // Computed property to check if a cell is merged
 const isMerged = (rowIndex: number, cellIndex: number): boolean => {
   return mergedTiles.value.some(tile => tile.y === rowIndex && tile.x === cellIndex);
+};
+
+const presentGameOverAlert = async () => {
+  alertOpen.value = true;
+  const alert = await alertController.create({
+    header: 'Game Over',
+    message: 'No more moves left!',
+    buttons: [
+    {
+      text: 'OK',
+      handler: () => {
+        restartGame(); // The game is restarted after the user presses the "OK" button
+        alertOpen.value = false;
+      }
+    }
+  ]
+  });
+
+  await alert.present();
 };
 
 onMounted(() => {
