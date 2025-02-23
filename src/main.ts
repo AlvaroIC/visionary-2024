@@ -1,5 +1,5 @@
-import { createApp } from 'vue'
-import App from './App.vue'
+import { createApp } from 'vue';
+import App from './App.vue';
 import router from './router';
 
 import { IonicVue } from '@ionic/vue';
@@ -34,9 +34,13 @@ import '@ionic/vue/css/palettes/dark.system.css';
 /* Theme variables */
 import './theme/variables.css';
 
+// Import the i18n instance
+import i18n from './i18n';
+
 const app = createApp(App)
   .use(IonicVue)
-  .use(router);
+  .use(router)
+  .use(i18n); // Use the i18n plugin
 
 router.isReady().then(() => {
   app.mount('#app');
