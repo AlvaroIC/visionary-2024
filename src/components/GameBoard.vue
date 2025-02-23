@@ -76,6 +76,10 @@ const handleKeydown = async (event: KeyboardEvent) => {
         }, 200); // Clear merged tiles after animation
     }
 
+    if(game.value.checkWin()) {
+      await presentWinAlert(); // Show aler if the user won
+    }
+
     if (!game.value.canMove() && alertOpen.value === false) {
       await presentGameOverAlert(); // Show alert if no further move is possible
     }
@@ -134,6 +138,28 @@ const resizeGame = (newSize: number) => {
 // Computed property to check if a cell is merged
 const isMerged = (rowIndex: number, cellIndex: number): boolean => {
   return mergedTiles.value.some(tile => tile.y === rowIndex && tile.x === cellIndex);
+};
+
+const presentWinAlert = async () => {
+    const alert = await alertController.create({
+      header: t('win'),
+      message: t('win-explanation'),
+      buttons: [
+        {
+          text: t('win-option-new-game'),
+          handler: () => {
+            restartGame();
+          }
+        },
+        {
+          text: t('win-option-keep-playing'),
+          handler: () => {
+          }
+        }
+      ]
+    });
+
+    await alert.present();
 };
 
 const presentGameOverAlert = async () => {

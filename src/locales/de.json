@@ -10,7 +10,11 @@
     "resize-question": "Das Board neu skalieren?",
     "resize-question-explanation": "Sind Sie sicher, dass Sie die Größe des Boards ändern möchten? Ihr Fortschritt geht verloren. Wenn ja, wählen Sie eine neue Größe.",
     "resize-question-cancel": "Abbrechen",
-    "resize-question-resize": "Größe ändern",
+    "resize-question-resize": "Größe Ändern",
+    "win": "Du hast Gewonnen!",
+    "win-explanation": "Du hast Gewonnen! Was möchtest du als nächstes tun?",
+    "win-option-new-game": "Neues Spiel",
+    "win-option-keep-playing": "Weiterspielen",
     "game-over": "Du hast verloren!",
     "game-over-explanation": "Du hast verloren! Es sind keine Bewegungen mehr möglich."
 }

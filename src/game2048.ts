@@ -5,6 +5,7 @@ export class Game2048 {
     private currentScore: number;
     private bestScore: number;
     private mergedTiles: { y: number, x: number }[];
+    private has2048: boolean = false;
   
     // By default, the dimensions of the board are 3x3
     constructor(height: number = 3, width: number = 3) {
@@ -189,5 +190,19 @@ export class Game2048 {
 
     public getMergedTiles(): { y: number; x: number; }[] {
         return this.mergedTiles
+    }
+
+    public checkWin(): boolean {
+        if (!this.has2048) {
+            for (let y = 0; y < this.height; y++) {
+                for (let x = 0; x < this.width; x++) {
+                    if (this.board[y][x] === 2048) {
+                        this.has2048 = true;
+                        return true; // Return true only the first time 2048 is found
+                    }
+                }
+            }
+        }
+        return false; // Return false if 2048 has already been found or not found this turn
     }
 }  

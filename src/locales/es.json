@@ -11,6 +11,10 @@
     "resize-question-explanation": "¿Estás seguro de que deseas cambiar el tamaño del tablero? Tu progreso se perderá. Si es así, elige un nuevo tamaño.",
     "resize-question-cancel": "Cancelar",
     "resize-question-resize": "Reescalar",
+    "win": "¡Has Ganado!",
+    "win-explanation": "¡Has Ganado! ¿Qué deseas hacer a continuación?",
+    "win-option-new-game": "Nuevo Juego",
+    "win-option-keep-playing": "Seguir Jugando",
     "game-over": "¡Has Perdido!",
     "game-over-explanation": "¡Has perdido! Ya no hay más movimientos posibles."
 }

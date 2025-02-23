@@ -11,6 +11,10 @@
     "resize-question-explanation": "Êtes-vous sûr de vouloir redimensionner le tableau ? Votre progression sera perdue. Si c'est le cas, choisissez une nouvelle taille.",
     "resize-question-cancel": "Annuler",
     "resize-question-resize": "Redimensionner",
+    "win": "Vous avez gagné!",
+    "win-explanation": "Vous avez gagné! Que veux-tu faire ensuite?",
+    "win-option-new-game": "Nouveau jeu",
+    "win-option-keep-playing": "Continuer à Jouer",
     "game-over": "Vous avez perdu!",
     "game-over-explanation": "Vous avez perdu! Il n'y a plus de mouvements possibles."
 }
