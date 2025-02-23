@@ -1,22 +1,22 @@
 <template>
   <div>
-      <ScoreBoard :currentScore="game.getCurrentScore()" :bestScore="game.getBestScore()" />
+    <ScoreBoard :currentScore="game.getCurrentScore()" :bestScore="game.getBestScore()" />
 
-      <div class="board">
-          <div v-for="(row, rowIndex) in game.paint()" :key="rowIndex" class="row">
-              <div v-for="(cell, cellIndex) in row" 
-                :key="cellIndex" 
-                class="cell"
-                :style="{ backgroundColor: getTileColor(cell) }"
-                >
-                  {{ cell || '' }}
-              </div>
-          </div>
+    <div class="board">
+      <div v-for="(row, rowIndex) in game.paint()" :key="rowIndex" class="row">
+        <div v-for="(cell, cellIndex) in row" 
+             :key="cellIndex" 
+             :class="{ 'cell': true, 'merged': isMerged(rowIndex, cellIndex) }"
+             :style="{ backgroundColor: getTileColor(cell) }"
+             >
+          {{ cell || '' }}
+        </div>
       </div>
-  
-      <div class="controls">
-        <RestartButton @restart="restartGame" />
-      </div>
+    </div>
+
+    <div class="controls">
+      <RestartButton @restart="restartGame" />
+    </div>
   </div>
 </template>
 
@@ -27,6 +27,7 @@ import  ScoreBoard from './ScoreBoard.vue';
 import RestartButton from './RestartButton.vue';
 
 const game = ref(new Game2048(4, 4));
+const mergedTiles = ref<{ y: number, x: number }[]>([]);
 
 const colorMap = new Map<number, string>();
 
@@ -46,15 +47,27 @@ const getTileColor = (value: number) => {
 
 // Handles the key press events
 const handleKeydown = (event: KeyboardEvent) => {
+    let moved = false;
   if (event.key === 'w' || event.key === 'ArrowUp') {
-      game.value.moveUp();
+    game.value.moveUp();
+    moved = true;
   } else if (event.key === 'd' || event.key === 'ArrowRight') {
-      game.value.moveRight();
+    game.value.moveRight();
+      moved = true;
   } else if (event.key === 's' || event.key === 'ArrowDown') {
-      game.value.moveDown();
+    game.value.moveDown();
+      moved = true;
   } else if (event.key === 'a' || event.key === 'ArrowLeft') {
-      game.value.moveLeft();
+    game.value.moveLeft();
+      moved = true;
   }
+
+    if (moved) {
+        mergedTiles.value = game.value.getMergedTiles();
+        setTimeout(() => {
+            mergedTiles.value = [];
+        }, 200); // Clear merged tiles after animation
+    }
 };
 
 let touchStartX = 0, touchStartY = 0, touchEndX = 0, touchEndY = 0;
@@ -73,15 +86,34 @@ const handleTouchEnd = (event: TouchEvent) => {
   const deltaX = touchEndX - touchStartX;
   const deltaY = touchEndY - touchStartY;
 
+    let moved = false;
   if (Math.abs(deltaX) > Math.abs(deltaY)) {
-      deltaX > 30 ? game.value.moveRight() : game.value.moveLeft();
+      if (Math.abs(deltaX) > 30) {
+          deltaX > 0 ? game.value.moveRight() : game.value.moveLeft();
+          moved = true;
+      }
   } else {
-      deltaY > 30 ? game.value.moveDown() : game.value.moveUp();
+      if (Math.abs(deltaY) > 30) {
+          deltaY > 0 ? game.value.moveDown() : game.value.moveUp();
+          moved = true;
+    }
   }
+    if (moved) {
+        mergedTiles.value = game.value.getMergedTiles();
+        setTimeout(() => {
+            mergedTiles.value = [];
+        }, 200); // Clear merged tiles after animation duration
+    }
 };
 
 const restartGame = () => {
   game.value.restart();
+    mergedTiles.value = []; // Reset merged tiles on restart
+};
+
+// Computed property to check if a cell is merged
+const isMerged = (rowIndex: number, cellIndex: number): boolean => {
+  return mergedTiles.value.some(tile => tile.y === rowIndex && tile.x === cellIndex);
 };
 
 onMounted(() => {
@@ -123,6 +155,11 @@ onUnmounted(() => {
   font-weight: bold;
   border-radius: 5px;
   margin: 3px;
+  transition: transform 0.2s ease; /* Add transition for smooth animation */
+}
+.cell.merged {
+    transform: scale(1.2); /* Make merged cells 20% larger */
+    z-index: 1; /* Ensure merged tiles appear on top */
 }
 
 .controls {

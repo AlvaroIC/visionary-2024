@@ -1,9 +1,10 @@
 export class Game2048 {
-    board: number[][];
-    height: number;
-    width: number;
-    currentScore: number;
-    bestScore: number;
+    private board: number[][];
+    private height: number;
+    private width: number;
+    private currentScore: number;
+    private bestScore: number;
+    private mergedTiles: { y: number, x: number }[];
   
     // By default, the dimensions of the board are 3x3
     constructor(height: number = 3, width: number = 3) {
@@ -13,6 +14,7 @@ export class Game2048 {
         // Gets the current best score
         this.bestScore = this.loadBestScore();
         this.board = Array.from({ length: height }, () => Array(width).fill(0));
+        this.mergedTiles = [];
         // The game starts after the first 2 is placed on the board
         this.next();
     }
@@ -62,6 +64,9 @@ export class Game2048 {
   
     // Moves the numbers to the right and places the next 2
     public moveRight(): void {
+        // Resets the merged tiles array
+        this.mergedTiles = [];
+
         for (let y = 0; y < this.height; y++) {
             // Filter out all zeros (empty cells)
             const row = this.board[y].filter(val => val !== 0);
@@ -73,6 +78,8 @@ export class Game2048 {
                     this.currentScore += row[i] * 2;
                     row[i] *= 2;
                     row.splice(i - 1, 1); // Remove the merged tile
+                    this.mergedTiles.push({ y: y, x: i + (this.width - row.length -1) });
+                    console.log(this.mergedTiles);
                 }
             }
         
@@ -91,7 +98,6 @@ export class Game2048 {
             this.saveBestScore(); // Save new best score
         }
         
-        //
         this.next();
     }
   
@@ -106,7 +112,8 @@ export class Game2048 {
   
     private rotateBoard(): void {
         const newBoard: number[][] = [];
-      
+        const newMergedTiles: {y: number, x: number}[] = [];
+
         for (let x = 0; x < this.width; x++) {
             const newRow: number[] = [];
             for (let y = this.height - 1; y >= 0; y--) {
@@ -114,7 +121,13 @@ export class Game2048 {
             }
             newBoard.push(newRow);
         }
-  
+        
+        // Rotate merged tiles
+        for (const tile of this.mergedTiles) {
+            newMergedTiles.push({y: tile.x, x: this.height - 1 - tile.y});
+        }
+        this.mergedTiles = newMergedTiles;
+
         this.board = newBoard;
         [this.height, this.width] = [this.width, this.height];
     }
@@ -152,5 +165,8 @@ export class Game2048 {
     public getBestScore(): number {
         return this.bestScore;
     }
-    
+
+    public getMergedTiles(): { y: number; x: number; }[] {
+        return this.mergedTiles
+    }
 }  
