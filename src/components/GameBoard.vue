@@ -123,7 +123,7 @@ const handleTouchEnd = (event: TouchEvent) => {
 
 const restartGame = () => {
   game.value.restart();
-    mergedTiles.value = []; // Reset merged tiles on restart
+  mergedTiles.value = []; // Reset merged tiles on restart
 };
 
 const initializeGame = (size: number) => {
@@ -148,7 +148,7 @@ const presentWinAlert = async () => {
         {
           text: t('win-option-new-game'),
           handler: () => {
-            restartGame();
+            restartGame(); // If the user chooses to start a new game, the board is restarted
           }
         },
         {
