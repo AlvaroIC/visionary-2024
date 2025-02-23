@@ -15,9 +15,7 @@
       </div>
   
       <div class="controls">
-          <div class="custom-button" @click="restartGame">
-            Restart
-          </div>
+        <RestartButton @restart="restartGame" />
       </div>
   </div>
 </template>
@@ -26,6 +24,7 @@
 import { ref, onMounted, onUnmounted } from 'vue';
 import { Game2048 } from '../game2048';
 import  ScoreBoard from './ScoreBoard.vue';
+import RestartButton from './RestartButton.vue';
 
 const game = ref(new Game2048(4, 4));
 
@@ -132,31 +131,5 @@ onUnmounted(() => {
   align-items: center;
   gap: 10px;
   margin-top: 20px;
-}
-
-.custom-button {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: auto;
-  min-width: 100px;
-  padding: 10px;
-  margin: 0 10px 15px 0;
-  font-size: 20px;
-  font-weight: bold;
-  background: #d34a4a;
-  border-radius: 10px;
-  color: white;
-  cursor: pointer;
-  white-space: nowrap;
-  transition: background 0.1s;
-}
-
-.custom-button:hover {
-  background: #b33b3b;
-}
-
-.custom-button:active {
-  background: #9e2a2a;
 }
 </style>
