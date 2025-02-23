@@ -18,7 +18,7 @@
   <style scoped>
   .scores {
     display: flex;
-    width: 250px;
+    width: 100%;
     gap: 5px;
   }
   
