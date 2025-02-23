@@ -1,4 +1,9 @@
 {
-    "hello": "Hello",
-    "goodbye": "Goodbye"
+    "score": "Score",
+    "best": "Best",
+    "restart": "Restart",
+    "restart-question": "Restart Game?",
+    "restart-question-explanation": "Are you sure you want to restart? Your progress will be lost.",
+    "restart-question-cancel": "Cancel",
+    "restart-question-restart": "Restart"
 }

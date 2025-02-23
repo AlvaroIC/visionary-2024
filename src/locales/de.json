@@ -1,4 +1,9 @@
 {
-    "hello": "Hello",
-    "goodbye": "Goodbye"
+    "score": "Punktzahl",
+    "best": "Beste",
+    "restart": "Neustart",
+    "restart-question": "Spiel neu Starten?",
+    "restart-question-explanation": "Sind Sie sicher, dass Sie neu starten möchten? Ihr Fortschritt geht verloren.",
+    "restart-question-cancel": "Abbrechen",
+    "restart-question-restart": "Neustart"
 }

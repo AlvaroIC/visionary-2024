@@ -1,4 +1,9 @@
 {
-    "hello": "Hello",
-    "goodbye": "Goodbye"
+    "score": "Puntuación",
+    "best": "Mejor",
+    "restart": "Reiniciar",
+    "restart-question": "¿Reiniciar la Partida?",
+    "restart-question-explanation": "¿Estás seguro de que quieres reiniciarla? Se perderá tu progreso.",
+    "restart-question-cancel": "Cancelar",
+    "restart-question-restart": "Reiniciar"
 }
