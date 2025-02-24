@@ -45,7 +45,7 @@ const alertButtons = [
   {
     text: t('resize-question-resize'),
     role: 'confirm',
-    handler: (data: { value: string }) => {
+    handler: (data: string ) => {
       const newSize = parseInt(data);
       if (newSize >= 2 && newSize <= 5) {
         gridSize.value = newSize;
