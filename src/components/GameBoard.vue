@@ -101,7 +101,8 @@ const handleTouchEnd = (event: TouchEvent) => {
   const deltaX = touchEndX - touchStartX;
   const deltaY = touchEndY - touchStartY;
 
-    let moved = false;
+  let moved = false;
+
   if (Math.abs(deltaX) > Math.abs(deltaY)) {
       if (Math.abs(deltaX) > 30) {
           deltaX > 0 ? game.value.moveRight() : game.value.moveLeft();
@@ -127,6 +128,7 @@ const restartGame = () => {
 };
 
 const initializeGame = (size: number) => {
+  console.log(size)
   game.value = new Game2048(size, size);
   colorMap.clear(); // Clear the color map
 };
@@ -210,8 +212,8 @@ onUnmounted(() => {
 }
 
 .cell {
-  width: 3em;
-  height: 3em;
+  width: 5vh;
+  height: 5vh;
   background: #eee4da;
   display: flex;
   align-items: center;
