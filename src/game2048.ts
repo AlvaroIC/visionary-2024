@@ -205,4 +205,19 @@ export class Game2048 {
         }
         return false; // Return false if 2048 has already been found or not found this turn
     }
+
+    // Public method to set the board (for testing purposes)
+    public setBoard(board: number[][]): void {
+        this.board = board;
+    }
+
+    // Public method to set the current score (for testing purposes)
+    public setCurrentScore(score: number): void {
+        this.currentScore = score;
+    }
+
+    // Public method to get the value of has2048 (for testing purposes)
+    public getHas2048(): boolean {
+        return this.has2048;
+    }
 }  
